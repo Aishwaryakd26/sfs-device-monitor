@@ -1,14 +1,16 @@
+@use 'variables' as *;
+
 :host {
   display: block;
   width: 100%;
 }
 
 .chart-wrapper {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
   padding: 16px 20px 12px 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: $shadow-sm;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -37,12 +39,12 @@
   .curr-val {
     font-size: 1.35rem;
     font-weight: 700;
-    color: #0f172a;
+    color: $text-main;
   }
 
   .curr-unit {
     font-size: 0.8rem;
-    color: #64748b;
+    color: $text-muted;
     font-weight: 500;
   }
 }

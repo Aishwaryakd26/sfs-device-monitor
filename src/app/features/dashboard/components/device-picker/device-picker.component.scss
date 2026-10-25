@@ -1,13 +1,15 @@
+@use 'variables' as *;
+
 .picker-container {
   display: flex;
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  background: #ffffff;
+  background: $bg-card;
   padding: 14px 20px;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  border-radius: $radius-lg;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-sm;
 }
 
 .picker-label {
@@ -28,13 +30,13 @@
 .device-select {
   width: 100%;
   appearance: none;
-  background: #f8fafc;
-  border: 1.5px solid #cbd5e1;
+  background: $bg-body;
+  border: 1.5px solid $border-input;
   padding: 8px 36px 8px 14px;
-  border-radius: 8px;
+  border-radius: $radius-md;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1e293b;
+  color: $text-body;
   cursor: pointer;
   outline: none;
   transition: all 0.2s ease;
@@ -42,7 +44,7 @@
   &:focus {
     border-color: #3b82f6;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-    background: #ffffff;
+    background: $bg-card;
   }
 }
 
@@ -52,7 +54,7 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  color: #64748b;
+  color: $text-muted;
   font-size: 0.8rem;
 }
 
@@ -64,24 +66,24 @@
 }
 
 .quick-pill {
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background: $bg-muted;
+  border: 1px solid $border-color;
   padding: 5px 10px;
-  border-radius: 6px;
+  border-radius: $radius-sm;
   font-size: 0.78rem;
   font-weight: 600;
-  color: #475569;
+  color: $secondary;
   cursor: pointer;
   transition: all 0.15s ease;
 
   &:hover {
-    background: #e2e8f0;
-    color: #1e293b;
+    background: $border-color;
+    color: $text-body;
   }
 
   &.active {
-    background: #2563eb;
+    background: $primary;
     color: #ffffff;
-    border-color: #2563eb;
+    border-color: $primary;
   }
 }
