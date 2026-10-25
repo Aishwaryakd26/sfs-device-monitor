@@ -1,18 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { RuntimeConfigService } from './core/config/runtime-config.service';
 import { EnvBadgeComponent } from './shared/components/env-badge/env-badge.component';
 import { ToastContainerComponent } from './shared/components/toast-container/toast-container.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
+    RouterOutlet,
     EnvBadgeComponent,
-    ToastContainerComponent,
-    DashboardComponent
+    ToastContainerComponent
   ],
   template: `
     <div class="app-shell" *ngIf="config$ | async as config">
@@ -34,17 +34,17 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 
           <div class="header-status">
             <span class="pulse-dot"></span>
-            <span class="status-text">Core API Connected</span>
+            <span class="status-text">Core API Live</span>
           </div>
         </div>
       </header>
 
-      <!-- Main Workspace -->
+      <!-- Main Workspace with Modern Router Outlet -->
       <main class="main-content">
-        <app-dashboard></app-dashboard>
+        <router-outlet></router-outlet>
       </main>
 
-      <!-- Central Toast Notifications -->
+      <!-- Centralized Toast Notifications -->
       <app-toast-container></app-toast-container>
     </div>
   `,
