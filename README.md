@@ -1,27 +1,66 @@
-# SfsDeviceMonitorApp
+# SFS Device Performance Monitor
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+A high-performance, real-time manufacturing device monitoring dashboard built with **Angular 16** (Standalone architecture) and **D3.js v7**.
 
-## Development server
+## 🚀 Key Features & Architectural Highlights
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 1. Angular 16 Modern Standalone Architecture
+- Zero `NgModule` boilerplate: Components, services, and directives use the modern Angular 16 Standalone standard (`standalone: true`).
+- Clean separation of concerns:
+  - `core/`: Singleton services (`RuntimeConfigService`, `DeviceApiService`, `DeviceSseService`), functional HTTP interceptors (`apiErrorInterceptor`), and notifications.
+  - `shared/`: Generic, reusable presentational components and D3.js chart wrappers.
+  - `features/dashboard/`: Smart container, presentational components, and a unidirectional `DashboardStore`.
 
-## Code scaffolding
+### 2. D3.js High-Performance Charts
+- **Time-Series Line Chart**: Visualizes historic Parts Per Minute (PPM) and total Parts Produced since the active device was selected.
+- **Radial Progress Gauge**: Renders completion percentage of the current order (`productionState` vs `productionTarget`).
+- **NgZone Optimization**: D3 charts run outside Angular change detection (`runOutsideAngular`) for 60fps rendering without triggering unnecessary CD cycles.
+- **Responsive Layout**: Uses `ResizeObserver` to smoothly adapt SVG scales and dimensions to window and container resizing.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 3. Server-Sent Events (SSE) & Connection Lifecycle Management
+- Direct real-time streaming via `EventSource` (`/events/{deviceId}`).
+- Clean `switchMap` / tear-down logic in `DashboardStore`: Switching devices automatically terminates the prior SSE connection to prevent memory leaks.
+- Real-time detection of status transitions (`running` $\rightarrow$ `stopped` or `maintenance`) automatically creates incident records in the **Production Interrupts** log.
 
-## Build
+### 4. Dynamic Runtime Configuration
+- Fulfils requirement: *"The configuration has to be updated during runtime automatically."*
+- `RuntimeConfigService` polls `/config` periodically in the background, updating environment flags and resolving dynamic endpoint URLs without requiring browser reloads.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 5. Resilient Error Handling & Core Service Fault Tolerance
+- Functional `apiErrorInterceptor` with automatic retry strategies for transient network issues.
+- Floating `ToastContainerComponent` surfaces user-friendly alert banners with auto-dismiss timers when the unstable backend produces HTTP errors.
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🛠️ Development & Running Locally
 
-## Running end-to-end tests
+### Prerequisites
+- Node.js 18+ (tested on Node 20 / 24)
+- npm 9+
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Quick Start
+```bash
+# 1. Install dependencies
+npm install
 
-## Further help
+# 2. Run local development server
+npm start
+# or
+ng serve
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# 3. Access the dashboard
+# Open http://localhost:4200 in your browser
+```
+
+### Production Build
+```bash
+npm run build
+```
+
+---
+
+## 📋 Git Commit Log
+Clean, progressive Git history is maintained in the `.git` directory:
+- `init_angular_16`: Initial scaffold of Angular 16 project
+- `install_d3_dependencies`: Installation of `d3` and `@types/d3`
+- `implement_enterprise_dashboard_and_d3_charts`: Full store, services, D3 charts, SSE integration, and error interceptors
