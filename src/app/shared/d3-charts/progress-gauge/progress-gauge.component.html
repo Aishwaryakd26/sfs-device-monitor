@@ -1,0 +1,25 @@
+<div class="gauge-card">
+  <div class="gauge-header">
+    <h4 class="gauge-title">Order Production Progress</h4>
+    <span class="order-badge" *ngIf="orderNumber">Order #{{ orderNumber }}</span>
+  </div>
+
+  <div class="gauge-body">
+    <div #gaugeContainer class="gauge-svg-container"></div>
+    
+    <div class="progress-details">
+      <div class="detail-row">
+        <span class="detail-label">Target Units:</span>
+        <span class="detail-value">{{ target | number }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Produced So Far:</span>
+        <span class="detail-value highlight">{{ produced | number }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Remaining:</span>
+        <span class="detail-value">{{ (target > produced ? target - produced : 0) | number }}</span>
+      </div>
+    </div>
+  </div>
+</div>

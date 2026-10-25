@@ -1,0 +1,38 @@
+<div class="interrupt-card">
+  <div class="card-header">
+    <h4 class="card-title">Production Interrupts</h4>
+    <span class="count-badge" [class.has-interrupts]="interrupts.length > 0">
+      {{ interrupts.length }} {{ interrupts.length === 1 ? 'Incident' : 'Incidents' }}
+    </span>
+  </div>
+
+  <div class="interrupt-list" *ngIf="interrupts.length > 0; else noInterrupts">
+    <div 
+      *ngFor="let interrupt of interrupts" 
+      class="interrupt-item"
+      [ngClass]="'item-' + interrupt.status"
+    >
+      <div class="interrupt-icon">
+        {{ interrupt.status === 'stopped' ? '🛑' : '🔧' }}
+      </div>
+      <div class="interrupt-info">
+        <div class="interrupt-title">
+          Machine {{ interrupt.status === 'stopped' ? 'Emergency / Stopped State' : 'Maintenance Intervention' }}
+        </div>
+        <div class="interrupt-meta">
+          <span>Device #{{ interrupt.deviceId }}</span>
+          <span>•</span>
+          <span>{{ interrupt.timestamp | date:'HH:mm:ss' }}</span>
+          <span *ngIf="interrupt.durationSeconds">• {{ interrupt.durationSeconds }}s duration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noInterrupts>
+    <div class="empty-state">
+      <span class="empty-icon">✨</span>
+      <p class="empty-text">No interrupts detected for the selected machine session.</p>
+    </div>
+  </ng-template>
+</div>

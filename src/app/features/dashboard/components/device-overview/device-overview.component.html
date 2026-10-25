@@ -1,0 +1,27 @@
+<div class="overview-banner" [ngClass]="'banner-' + (status || 'running')">
+  <div class="banner-main">
+    <div class="device-meta">
+      <span class="device-tag">Active Machine</span>
+      <h2 class="device-id">Machine #{{ deviceId }}</h2>
+    </div>
+    
+    <div class="status-box">
+      <app-status-pill [status]="status" [showHint]="true"></app-status-pill>
+    </div>
+  </div>
+
+  <!-- Visual Hints for Problems -->
+  <div *ngIf="status === 'stopped'" class="problem-hint stopped-hint">
+    <span class="hint-icon">🛑</span>
+    <div class="hint-content">
+      <strong>Machine Halted:</strong> Production stopped abruptly. Inspect machine sensor inputs and resolve interrupt log.
+    </div>
+  </div>
+
+  <div *ngIf="status === 'maintenance'" class="problem-hint maintenance-hint">
+    <span class="hint-icon">🔧</span>
+    <div class="hint-content">
+      <strong>Scheduled Maintenance in Progress:</strong> Machine undergoing calibration or servicing. Metric collection is suspended.
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="toast-wrapper" aria-live="polite">
+  <div 
+    *ngFor="let toast of notifications$ | async" 
+    class="toast-card" 
+    [ngClass]="'toast-' + toast.type"
+  >
+    <div class="toast-icon">
+      <span *ngIf="toast.type === 'error'">⚠️</span>
+      <span *ngIf="toast.type === 'warning'">⚡</span>
+      <span *ngIf="toast.type === 'info'">ℹ️</span>
+      <span *ngIf="toast.type === 'success'">✅</span>
+    </div>
+    <div class="toast-content">
+      <div class="toast-title">{{ toast.title }}</div>
+      <div class="toast-message">{{ toast.message }}</div>
+      <div class="toast-time">{{ toast.timestamp | date:'HH:mm:ss' }}</div>
+    </div>
+    <button 
+      *ngIf="toast.dismissible" 
+      class="close-btn" 
+      (click)="dismiss(toast.id)"
+      aria-label="Close notification"
+    >
+      &times;
+    </button>
+  </div>
+</div>

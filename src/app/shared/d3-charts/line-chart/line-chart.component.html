@@ -1,0 +1,10 @@
+<div class="chart-wrapper">
+  <div class="chart-header">
+    <h4 class="chart-title">{{ title }}</h4>
+    <div class="chart-current-value" *ngIf="data && data.length > 0">
+      <span class="curr-val">{{ data[data.length - 1].value | number:'1.1-2' }}</span>
+      <span class="curr-unit">{{ unit }}</span>
+    </div>
+  </div>
+  <div #chartContainer class="chart-container"></div>
+</div>

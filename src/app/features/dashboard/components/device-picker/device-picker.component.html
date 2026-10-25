@@ -1,0 +1,33 @@
+<div class="picker-container">
+  <label for="deviceSelect" class="picker-label">
+    <span class="label-icon">⚙️</span>
+    <span>Select Production Machine:</span>
+  </label>
+  
+  <div class="select-wrapper">
+    <select 
+      id="deviceSelect" 
+      [ngModel]="selectedDeviceId" 
+      (ngModelChange)="onDeviceChange($event)"
+      class="device-select"
+    >
+      <option value="" disabled>-- Choose a Device --</option>
+      <option *ngFor="let device of devices" [value]="device">
+        Machine #{{ device }}
+      </option>
+    </select>
+    <span class="select-arrow">▾</span>
+  </div>
+
+  <div class="device-pill-list" *ngIf="devices && devices.length > 0">
+    <button
+      *ngFor="let device of devices.slice(0, 6)"
+      type="button"
+      class="quick-pill"
+      [class.active]="device === selectedDeviceId"
+      (click)="onDeviceChange(device)"
+    >
+      #{{ device }}
+    </button>
+  </div>
+</div>
