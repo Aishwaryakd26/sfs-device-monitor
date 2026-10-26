@@ -11,11 +11,13 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as d3 from 'd3';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+import { TranslationService } from '../../../core/i18n/translation.service';
 
 @Component({
   selector: 'app-progress-gauge',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './progress-gauge.component.html',
   styleUrls: ['./progress-gauge.component.scss']
 })
@@ -27,9 +29,14 @@ export class ProgressGaugeComponent implements OnInit, OnChanges {
   @Input() orderNumber: string = '';
 
   private readonly zone = inject(NgZone);
+  private readonly translationService = inject(TranslationService);
 
   ngOnInit(): void {
     this.renderGauge();
+    // Re-render gauge text when language switches
+    this.translationService.currentLang$.subscribe(() => {
+      this.renderGauge();
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -91,13 +98,14 @@ export class ProgressGaugeComponent implements OnInit, OnChanges {
         .attr('fill', '#0f172a')
         .text(`${percentage.toFixed(1)}%`);
 
+      const completedLabel = this.translationService.translate('completed');
       svg.append('text')
         .attr('text-anchor', 'middle')
         .attr('y', 14)
         .attr('font-size', '11px')
         .attr('font-weight', '500')
         .attr('fill', '#64748b')
-        .text('COMPLETED');
+        .text(completedLabel);
     });
   }
 }

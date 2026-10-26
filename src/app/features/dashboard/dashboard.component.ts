@@ -6,6 +6,7 @@ import { DeviceOverviewComponent } from './components/device-overview/device-ove
 import { InterruptLogComponent } from './components/interrupt-log/interrupt-log.component';
 import { LineChartComponent } from '../../shared/d3-charts/line-chart/line-chart.component';
 import { ProgressGaugeComponent } from '../../shared/d3-charts/progress-gauge/progress-gauge.component';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,8 @@ import { ProgressGaugeComponent } from '../../shared/d3-charts/progress-gauge/pr
     DeviceOverviewComponent,
     InterruptLogComponent,
     LineChartComponent,
-    ProgressGaugeComponent
+    ProgressGaugeComponent,
+    TranslatePipe
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']

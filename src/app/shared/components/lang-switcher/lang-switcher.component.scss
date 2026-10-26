@@ -1,0 +1,33 @@
+@use 'src/assets/styles/variables' as *;
+
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  background: $bg-muted;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: 2px;
+  gap: 2px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $text-muted;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: $text-main;
+  }
+
+  &.active {
+    background: $bg-card;
+    color: $primary;
+    box-shadow: $shadow-sm;
+  }
+}

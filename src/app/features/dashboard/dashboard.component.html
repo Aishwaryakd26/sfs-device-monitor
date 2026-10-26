@@ -19,8 +19,8 @@
     <div class="grid-item">
       <app-line-chart
         [data]="state.partsPerMinuteHistory"
-        [title]="'Historic Parts Per Minute'"
-        [unit]="'ppm'"
+        [title]="'historicPpm' | translate"
+        [unit]="'ppmUnit' | translate"
         [strokeColor]="'#2563eb'"
         [fillColor]="'rgba(37, 99, 235, 0.08)'"
       ></app-line-chart>
@@ -30,8 +30,8 @@
     <div class="grid-item">
       <app-line-chart
         [data]="state.partsProducedHistory"
-        [title]="'Historic Parts Produced (Current Session)'"
-        [unit]="'units'"
+        [title]="'historicProduced' | translate"
+        [unit]="'unitsUnit' | translate"
         [strokeColor]="'#10b981'"
         [fillColor]="'rgba(16, 185, 129, 0.08)'"
       ></app-line-chart>

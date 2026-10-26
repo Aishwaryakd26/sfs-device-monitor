@@ -4,11 +4,16 @@
     <div class="header-left">
       <div class="brand-logo">
         <span class="logo-icon">⚡</span>
-        <span class="logo-text">SFS Device Performance Monitor</span>
+        <span class="logo-text">{{ 'appTitle' | translate }}</span>
       </div>
     </div>
 
     <div class="header-right">
+      <!-- Dynamic Language Switcher (EN / DE) -->
+      <app-lang-switcher 
+        [availableLanguages]="config.availableLanguages || ['en', 'de']"
+      ></app-lang-switcher>
+
       <!-- Dynamic Environment Indicator -->
       <app-env-badge 
         [environmentName]="config.environmentName"
@@ -17,7 +22,7 @@
 
       <div class="header-status">
         <span class="pulse-dot"></span>
-        <span class="status-text">Core API Live</span>
+        <span class="status-text">{{ 'coreApiLive' | translate }}</span>
       </div>
     </div>
   </header>

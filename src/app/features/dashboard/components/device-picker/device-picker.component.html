@@ -1,7 +1,7 @@
 <div class="picker-container">
   <label for="deviceSelect" class="picker-label">
     <span class="label-icon">⚙️</span>
-    <span>Select Production Machine:</span>
+    <span>{{ 'selectMachine' | translate }}</span>
   </label>
   
   <div class="select-wrapper">
@@ -11,9 +11,9 @@
       (ngModelChange)="onDeviceChange($event)"
       class="device-select"
     >
-      <option value="" disabled>-- Choose a Device --</option>
+      <option value="" disabled>{{ 'chooseDevice' | translate }}</option>
       <option *ngFor="let device of devices" [value]="device">
-        Machine #{{ device }}
+        #{{ device }}
       </option>
     </select>
     <span class="select-arrow">▾</span>

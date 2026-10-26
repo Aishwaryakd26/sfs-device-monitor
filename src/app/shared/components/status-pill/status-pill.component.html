@@ -1,7 +1,7 @@
 <div class="status-pill" [ngClass]="statusClass">
   <span class="status-dot"></span>
-  <span class="status-label">{{ status | titlecase }}</span>
+  <span class="status-label">{{ statusLabelKey | translate }}</span>
   <span *ngIf="showHint && status !== 'running'" class="hint-badge">
-    {{ status === 'stopped' ? 'Needs Attention' : 'Under Service' }}
+    {{ (status === 'stopped' ? 'hintStoppedTitle' : 'hintMaintenanceTitle') | translate }}
   </span>
 </div>
